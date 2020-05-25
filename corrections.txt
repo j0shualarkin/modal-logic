@@ -1,0 +1,15 @@
+
+knowledgeStart
+
+20/54 : last line should read ad is true where d is the diamond symbol,
+      currently it reads bd where b is the diamond symbol
+
+
+RelationalBackground:
+
+4/71 : title is `More on Set Notation`
+After the second equation, "... here ranges overall all objects"
+--> should read "ranges over all objects"
+
+
+

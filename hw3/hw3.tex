@@ -1,0 +1,83 @@
+\documentclass{article}
+\usepackage{inputenc,amsmath,amsthm,amssymb,amsfonts,tikz}
+
+\title{M482 Homework 3}
+\author{yr name here}
+\date{Tuesday, 29 January 2019}
+
+\begin{document}
+
+\maketitle
+
+\section{Satisfiability in modal logic}
+A modal sentence $\phi$ is $\textit{satisfiable}$ if there is some model $M$ and some $x \in M$ such that $x \models \phi$. Show that each of the following sentences is satisfiable.
+\begin{enumerate}
+    \item $(\Diamond\Box p) \land (\Box\Diamond p)$
+    \item $(\Diamond\Box p) \land (\neg\Box\Diamond p)$
+    \item $(\neg\Diamond\Box p) \land (\Box\Diamond p)$
+    \item $(\neg\Diamond\Box p) \land (\neg\Box\Diamond p)$
+\end{enumerate}
+
+
+\vspace{1.5in}
+
+\section{Satisfiability on a symmetric model}
+A modal sentence $\phi$ is $\textit{satisfiable on a symmetric model}$ if there is some $\textit{symmetric model} M$ and some $x \in M$ such that $x \models \phi$. Which of the following sentences is satisfiable on a symmetric model?
+
+\begin{enumerate}
+    \item $(\Diamond\Box p) \land (\Box\Diamond p)$
+    \item $(\Diamond\Box p) \land (\neg\Box\Diamond p)$
+    \item $(\neg\Diamond\Box p) \land (\Box\Diamond p)$
+    \item $(\neg\Diamond\Box p) \land (\neg\Box\Diamond p)$
+\end{enumerate}
+
+\vspace{1.5in}
+
+\section{Partitions on a fixed set $X$, and an order on them}
+
+\begin{enumerate}
+    \item Find five partitions of $\{1,2,3,4\}$. There are fifteen in total, but you only need to find five of them. Call your partitions $\Pi_1 , \dots , \Pi_5$.
+    
+    \begin{enumerate}
+        \item $\Pi_1$
+        \item $\Pi_2$
+        \item $\Pi_3$
+        \item $\Pi_4$
+        \item $\Pi_5$
+    \end{enumerate}
+    
+    \item Let $X$ be a set. Let $\Pi$ and $\Pi '$ be partitions on $X$. We say that $\Pi ' \textit{ refines } \Pi$ if every cell of $\Pi '$ is a subset of a cell of $\Pi$. In other words, if $s \equiv_{\Pi '} t$, then  $s \equiv_{\Pi} t$. We write $\Pi \leq \Pi '$. We also say that $\Pi$ is $\textit{coarser}$ than $\Pi '$, or that $\Pi '$ is $\textit{finer}$ than $\Pi$. 
+    
+    
+    \item Prove that no matter what set $X$ we start with, (Partitions($X$), $\leq$) is always a partial order. Here, Partitions($X$) is the set of all partitions of $X$.
+    
+    
+    
+\end{enumerate}
+
+\vspace{1.5in}
+
+
+
+\section{Partition refinement on graphs}
+Draw any graph on the set $\{1,2,3,4\}$. Take the five partitions which you found in problem 3, part 1, and call them $\Pi_1 , \dots , \Pi_5$. Then find refine($G$,$\Pi_1$), $\dots$, refine refine($G$,$\Pi_5$).
+
+\vspace{1.5in}
+
+
+\section{Partition refinement on graphs}
+Let $G$ be a graph. Consider the function $$f : \text{partitions}(G) \rightarrow partitions(G)$$ given by $f(\Pi) = \text{refine}(G,\Pi)$.
+
+\begin{enumerate}
+    \item Show that $f$ is $\textit{monotone}$: if $\Pi \leq \Pi '$, then $f(\Pi) \leq f(\Pi ')$. You need to prove this for all graphs $G$ and all partitions of the set of nodes of $G$.
+    
+    \item Give an example of a graph $G$ and a partition $\Pi$ of its nodes such that $\Pi \nleqslant f(\Pi)$.
+    
+    \item Give an example of a graph $G$ and a partition $\Pi$ of its nodes such that $f(\Pi) \nleqslant \Pi$.
+    
+    \item Let $G$ be the graph shown in problem 4. Find a partition $\Pi$ such that $f(\Pi) = \Pi$.
+    
+    
+\end{enumerate}
+    
+\end{document}

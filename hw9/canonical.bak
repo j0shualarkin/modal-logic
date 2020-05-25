@@ -1,0 +1,55 @@
+#lang racket
+
+;; a sentence φ is : (p) | (not φ) |
+;;             (φ ∧ φ) | (φ or φ) | (necc φ) | (poss φ) 
+
+;; C_{0,1} = ((p) (not p))
+
+(define (powerset xs)
+  (cond
+    ((empty? xs) '(()))
+    (else (let ([rec (powerset (cdr xs))])
+            (append (map (λ (set) (cons (car xs) set)) rec) rec)))))
+
+(powerset '(p (not p)))
+
+(define C01 '((p) (not p)))
+
+
+;; conj-poss :: [φ] -> [φ]
+;; returns the conjunction of every sentence in the given set, with (necc _) wrapped around it
+(define (conj-poss sents)
+  (cond ((empty? sents) '())
+        (else `((necc ,(car sents)) ∧ ,(conj-poss (cdr sents))))))
+
+
+;; disj :: [φ] -> [φ]
+(define (disj sents)
+  (cond ((empty? sents) '())
+        (else `(,(car sents) ∨ ,(disj (cdr sents))))))
+
+
+
+;; nambla :: [φ] -> [φ]
+;; returns the conjunction of an iterated conj of [(poss ϕ) for each ϕ in the set]
+;;  ∧ (box [for each ϕ in S, iterated disj of ϕ])
+(define (nambla sents)
+  `(,(conj-poss sents) ∧ (necc ,(disj sents))))
+
+;; SD :: Num -> [φ]
+;; returns the set of state descriptions of order n
+(define (SD n)
+  (cond
+    ((zero? n) '())
+    (else (cons `(,(string->symbol (string-append "p" (number->string n))))
+                (cons
+                 `(not ,(string->symbol (string-append "p" (number->string n))))
+                 (SD (sub1 n)))))))
+
+;; canon : Num -> Num -> [φ]
+;; (canon (add1 h) n) = (map (λ (σ) (append-map `(,(nambla S) ∧ ,σ) (powerset (canon h n)))) (SD n))
+;; invariant: n >= 1
+(define (canon h n)
+  (cond
+    ((zero? h) C01)
+    (else (map (λ (σ) (append-map (λ (S) `(,(nambla S) ∧ ,σ)) (powerset (canon (sub1 h) n)))) (SD n)))))

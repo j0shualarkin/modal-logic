@@ -1,0 +1,160 @@
+ \documentclass[12pt]{article}
+%% note that some of the references from the answers were changed by hand
+%% search for Section and Figure
+  \usepackage{wrapfig}
+ \input{mystyle.sty}
+    \usepackage{proof}
+    \usepackage{url}
+    \usepackage{fitch}
+    \usepackage[all]{xy}  
+      \usepackage{enumitem}
+%\thispagestyle{empty}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,snakes,automata,backgrounds,petri,trees}
+\usepackage{pifont}
+\usepackage{pxfonts} 
+\oddsidemargin 0pt
+\evensidemargin 0 pt
+\topmargin -.3in
+\headsep 20pt
+\footskip 20pt
+\textheight 8.5in
+\textwidth 6.25in
+%\newcommand{\cal}[1]{\mathcal{#1}}
+% Alter some LaTeX defaults for better treatment of figures:
+    % See p.105 of "TeX Unbound" for suggested values.
+    % See pp. 199-200 of Lamport's "LaTeX" book for details.
+    %   General parameters, for ALL pages:
+%    \renewcommand{\truefraction}{0.9}	% max fraction of floats at top
+%    \renewcommand{\falsetomfraction}{0.8}	% max fraction of floats at bottom
+    %   Para meters for TEXT pages (not float pages):
+    \setcounter{topnumber}{2}
+    \setcounter{bottomnumber}{2}
+    \setcounter{totalnumber}{4}     % 2 may work better
+    \setcounter{dbltopnumber}{2}    % for 2-column pages
+    \renewcommand{\dbltopfraction}{0.9}	% fit big float above 2-col. text
+    \renewcommand{\textfraction}{0.07}	% allow minimal text w. figs
+    %   Parameters for FLOAT pages (not text pages):
+    \renewcommand{\floatpagefraction}{0.7}	% require fuller float pages
+	% N.B.: floatpagefraction MUST be less than topfraction !!
+    \renewcommand{\dblfloatpagefraction}{0.7}	% require fuller float pages
+
+
+\renewcommand\thesubsection{\arabic{subsection}}
+
+ \begin{document}
+
+
+\begin{center}
+{
+\Large  Modal Logic, Winter 2019   \\
+   Homework 5
+\\
+due Tuesday, February 12 \\
+} 
+\end{center}
+
+{\bf Note} In this homework, and in all work in this class: unless otherwise stated,
+you may use the soundness or completeness of a proof system.
+But whenever you do, you need to say which one you are using.
+
+
+\section{de Morgan's Laws}
+ 
+
+\begin{enumerate}
+\item Give a derivation that shows $\proves\nott(\phi\andd\psi)\iif (\nott \phi)\orr (\nott\psi)$.
+\item Give a derivation that shows $\proves(\nott \phi)\orr (\nott\psi) \iif \nott(\phi\andd\psi)$.
+\end{enumerate}
+In one of the two parts, you will need to use the Law of the Excluded Middle.
+
+\section{Satisfiability in propositional logic}
+Recall that  a propositional logic sentence
+$\phi$ is \emph{satisfiable} if there is some valuation $v$ such that $\semantics{$\phi$}_v =\true$.
+
+For each of the following sentences, tell whether true
+or false.  For the true ones, give a short proof.
+For the false ones, give a counterexample.
+\begin{enumerate}
+\index{satisfiable!in propositional logic}
+\item Every sentence $\phi$ or its negation $\nott\phi$ is satisfiable.
+\item Both $\phi$ and $\nott\phi$ are satisfiable. \label{partb}
+\item If $\phi\andd\psi$ is satisfiable, then both $\phi$ and $\psi$ are satisfiable. 
+\item If  both $\phi$ and $\psi$ are satisfiable,
+then $\phi\andd\psi$ is satisfiable.
+\item If $\phi\orr\psi$ is satisfiable, then either $\phi$ or $\psi$
+(or both) are satisfiable. 
+\item If  either $\phi$ or $\psi$ is satisfiable,
+then $\phi\orr\psi$ is satisfiable.
+\item  If $\phi$ and $\phi\iif\psi$ are satisfiable, then $\psi$ is satisfiable.
+\item Every sentence $\phi$ or its negation $\nott\phi$ is a tautology.
+\item  If $\phi\andd\psi$ is a tautology, then both $\phi$ and $\psi$ are tautologies. 
+\item If $\phi\orr\psi$ is a tautology, then either $\phi$ or $\psi$
+(or both) are tautologies. 
+\item If $\phi$ and $\phi\iif\psi$ are tautologies, then $\psi$ is a tautology.
+\end{enumerate}
+[As a hint, I'll solve the first two parts.
+Part (1) is true for the following reason: 
+Fix the sentence $\phi$.   Let $v$ be any valuation.
+Either $\semantics{$\phi$}  = \true$ or $\semantics{$\phi$} = \false$.
+In the first case, $v$ shows that $\phi$ is satisfiable.
+In the second case, 
+$$\semantics{$\nott\phi$}  = \nott \semantics{$\phi$}  = \nott \false  = \true,$$
+and therefore $v$ shows that $\nott\phi$ is satisfiable.
+On the other hand, part (\ref{partb}) is false.
+We may take $\phi$ to be $p\andd\nott p$.  This sentence is not satisfiable.]
+
+ 
+
+
+\section{Avoiding confusion}
+
+It is easy to confuse 
+the following two assertions:
+\begin{enumerate}
+\item[(i)]   $\not\proves \phi\iif \psi$ 
+\item[(ii)]  $\proves \phi\iif \nott\psi$.
+\end{enumerate}
+(i) says that there is \emph{no} derivation in our system that has no premises and ends with $\phi\iif \psi$.
+(ii) says that there  \emph{is} a  derivation in our system that has no premises and ends with $ \phi\iif \nott\psi$.
+
+\begin{enumerate}
+\item Give an example of two sentences $\phi$ and $\psi$ in propositional logic 
+with the property that $\not\proves \phi\iif \psi$ but    $ \not\proves \phi\iif \nott\psi$.
+This shows that (i) does not in general imply (ii).
+\item Give an example of two sentences $\phi$ and $\psi$ in propositional logic 
+with the property that $\proves \phi\iif \psi$ and also   $ \proves \phi\iif \nott\psi$.
+This shows that (ii) does not in general imply (i).
+\end{enumerate}
+
+ 
+\section{A step in the lemma on state descriptions}
+Recall from class the main lemma on state descriptions.
+It says:   For all sentences $\phi$, 
+and all state descriptions $\alpha$, 
+if $\occ(\phi)\subseteq \occ(\alpha)$, then 
+  either $\proves \alpha\iif \phi$, or else $\proves \alpha\iif \nott\phi$.
+
+The proof was by induction on $\phi$.  In the lecture slides, you can find the induction steps for $\andd$ and for $\nott$.
+Your task: prove the induction step for $\iif$.
+Be sure to use the relation between the sets $\occ(\phi\iif\psi)$, $\occ(\phi)$, and $occ(\psi)$.
+
+
+ \section{Consistent and satisfiable}
+ 
+ A sentence $\phi$ in propositional logic  is \emph{consistent} if $\not\proves\nott \phi$.
+That is, $\nott\phi$ is \emph{not} provable.  
+
+\begin{enumerate}
+\item 
+Prove that if $\phi$ is consistent, then $\phi$ is satisfiable.
+\item
+Prove that if $\phi$ is satisfiable, then $\phi$ is consistent.
+\end{enumerate}
+You will need to use either the soundness or completeness of our logic, or both.
+    Please be sure to write down exactly where
+you used these results.
+
+
+
+\end{document}

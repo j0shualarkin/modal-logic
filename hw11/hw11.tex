@@ -1,0 +1,457 @@
+
+
+ 
+  \documentclass[11pt]{article}
+
+\usepackage{amsmath,amssymb}
+    \usepackage{url}
+\thispagestyle{empty}
+\usepackage[all]{xy}
+\SelectTips{cm}{}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,snakes,automata,backgrounds,petri,patterns}
+\usepackage{pxfonts}
+\oddsidemargin 0pt
+\evensidemargin 0 pt
+\topmargin -.3in
+\headsep 20pt
+\footskip 20pt
+\textheight 8.5in
+\textwidth 6.25in
+\newcommand{\modelsall}[1]{\models{\mkern-15mu}\raise5pt\hbox{$\scriptstyle#1$}}
+
+ \newcommand{\forces}{\,\mbox{$\mathrel\|\mathrel{\mkern-9mu}-\,$}}
+\renewcommand{\ni}{\noindent}
+\newcommand{\hearts}{\textcolor{red}{\varheartsuit}}
+\newcommand{\diamonds}{\textcolor{red}{\vardiamondsuit}}
+\newcommand{\clubs}{\clubsuit}
+\newcommand{\Kbar}{\overline{K}}
+\newcommand{\Fin}{\mbox{Fin}}
+\newcommand{\Tot}{\mbox{Tot}}
+\newcommand{\Inf}{\mbox{Inf}}
+\newcommand{\Con}{\mbox{Con}}
+\newcommand{\Cof}{\mbox{Cof}}
+\newcommand{\Cput}{\mbox{Cput}}
+\newcommand{\Ext}{\mbox{Ext}}
+\newcommand{\dar}{\!\downarrow}
+\newcommand{\uar}{\!\uparrow}
+\newcommand{\A}{\cal A}
+\def\aext#1{\widetilde{#1}}
+\newcommand{\adamek}{Ad\'{a}mek}
+\renewcommand{\phi}{\varphi}
+\newcommand{\fv}[1]{{\mathsf{fv}}(#1)}
+\let\maps\colon  
+\newcommand{\mng}[1]{[\!\![ #1 ]\!\!]} 
+\newcommand{\rem}[1]{\relax}
+\newcommand{\afa}{\mbox{\it AFA}}
+\newcommand{\fc}[1]{\overline{#1}}
+\newcommand{\fcalt}[1]{{\widehat{#1}}}
+\newcommand{\abar}{\fc{a}}
+\newcommand{\bbar}{\fc{b}}
+\newcommand{\cbar}{\fc{c}}
+\newcommand{\abaralt}{\fcalt{a}}
+\newcommand{\bbaralt}{\fcalt{b}}
+\newcommand{\cbaralt}{\fcalt{c}}
+\newcommand{\nbar}{\fc{n}}
+\newcommand{\mbar}{\fc{m}}
+\newcommand{\pbar}{\fc{p}}
+\newcommand{\nbaralt}{\fcalt{n}}
+\newcommand{\mbaralt}{\fcalt{m}}
+\newcommand{\pbaralt}{\fcalt{p}}
+\newcommand{\sbar}{\fc{s}}
+\newcommand{\fbar}{\fc{f}}
+\newcommand{\gbar}{\fc{g}}
+\newcommand{\ubar}{\fc{u}}
+\newcommand{\Vbar}{\fc{V}}
+\newcommand{\Vbarbar}{\overline{\overline{V}}}
+\newcommand{\abarbar}{\overline{\overline{a}}}
+\newcommand{\bbarbar}{\overline{\overline{b}}}
+\newcommand{\vbar}{\vvec}
+\newcommand{\AFA}{\mbox{\it AFA}}
+%%%\newcommand{\id}{{\it id}}
+\newcommand{\Set}{{\catfont{Set}}}
+\newcommand{\Sets}{{\catfont{Class}}}
+\newcommand{\Class}{{\catfont{Class}}}
+\newcommand{\Sat}{{\it Sat}}
+\newcommand{\AtProp}{{\sf AtProp}}
+\newcommand{\bisim}{\equiv}
+\newcommand{\nec}{\Box}
+\newcommand{\necc}{\Box}
+\newcommand{\pos}{\lozenge}
+\newcommand{\poss}{\lozenge}
+\newcommand{\fr}{\it{Fr}}
+\newcommand{\strex}{\it{StrEx}}
+\newcommand{\Pow}{{\cal P}}
+\newcommand{\dagalt}{\uparrow}
+\newcommand{\iif}{\rightarrow}
+\newcommand{\iiff}{\leftrightarrow}
+\newcommand{\sbstut}[2]{[#2]#1} 
+
+\newcommand{\lang}{{\cal L}}
+\newcommand{\mang}{{\cal M}}
+
+\def\T#1{\mathcal{T}(#1)}
+\renewcommand{\L}{{T}^{\Pow}}
+
+\newcommand{\Gfinal}{\overline{\G}}
+
+\newcommand{\D}{\Delta}
+\newcommand{\functorf}{{\sf F}}
+\newcommand{\set}[1]{\{#1\}}
+\newcommand{\functorI}{{\sf I}}
+\newcommand{\sem}[1]{[\![ #1{]\!]}}
+\newcommand{\pair}[1]{\langle #1\rangle}
+\newcommand{\pairalt}[1]{\langle#1\rangle}
+\newcommand{\EE}{{\cal E}}
+\renewcommand{\AA}{{\cal A}}
+\newcommand{\K}{K}
+\newcommand{\KB}{KB}
+\newcommand{\Kfour}{K4}
+\newcommand{\Sfour}{S4}
+\newcommand{\Sfive}{S5}
+\newcommand{\FF}{{\cal F}}
+\newcommand{\RR}{{\cal R}}
+\newcommand{\UU}{{\cal U}}
+\newcommand{\id}{{\sf id}}
+\newcommand{\incl}{i}
+\newcommand{\inl}{{\sf inl}}
+\newcommand{\inr}{{\sf inr}}
+\newcommand{\nat}{{\sf nat}}
+\newcommand{\ch}{{\sf ch}}
+\newcommand{\emphterm}[1]{{\em #1}}
+\newcommand{\fmla}[2]{\forall #1(#2)}
+\newcommand{\st}{\mbox{\rm $\kern .3em%
+|\kern -.25em | \kern -.25em | \kern .4em$}}
+\newcommand{\identical}{\equiv}
+\newcommand{\quadidentical}{\quad \identical \quad}
+\newcommand{\Image}{{\it Image}}
+\newcommand{\restr}{\,{\upharpoonleft}\,}
+\newcommand{\inflang}{{\cal L}}
+\newcommand{\overlinej}{{k}}
+\newcommand{\proves}{\vdash}
+\newcommand{\Proves}{\mbox{\it Proves}}
+\renewcommand{\Pr}{\mbox{\it Pr}}
+\newcommand{\pow}{{\cal P}}
+\newcommand{\powfin}{{\cal P}_{\scriptstyle{fin}}}
+\newcommand{\quadeq}{\quad = \quad}
+\newcommand{\quadequiv}{\quad \equiv \quad}
+\newcommand{\quadiff}{\quad \mbox{iff} \quad}
+\newcommand{\quadsubseteq}{\quad \subseteq \quad}
+\newcommand{\first}{\mbox{$\pi_1$}}
+%\newcommand{\first}{\mbox{$1^{\it st}$}}
+\newcommand{\map}[3]{#1\,:#2 \rightarrow #3}
+\newcommand{\inclusionmap}[3]{#1\,:#2 \hookrightarrow #3}
+%\newcommand{\second}{\mbox{$2^{\it nd}$}}
+\newcommand{\langp}{{\cal M}}
+\newcommand{\ntrans}[3]{#1\,: #2 \rightarrow #3}
+\newcommand{\second}{\mbox{$\pi_2$}}
+\newcommand{\true}{\top}
+\newcommand{\false}{\bot}
+\newcommand{\andd}{\wedge}
+\newcommand{\orr}{\vee}
+\newcommand{\On}{\mbox{\it On}}
+\newcommand{\nott}{\neg}
+\newcommand{\tri}{\triangle}
+\newcommand{\Vafa}{V_{\it afa}}
+\newcommand{\sfnew}{{\sf new}}
+\newcommand{\supp}[1]{{\it support}#1}
+\newcommand{\dom}{{\it dom}}
+\newcommand{\ZFM}{\mbox{{\it ZFC}$^-$}}
+\newcommand{\ZFA}{\mbox{\it ZFA}}
+\newcommand{\ZFC}{\mbox{\it ZFC}}
+\newcommand{\zfc}{\ZFC}
+\newcommand{\Zfc}{\ZFC}
+\newcommand{\zf}{\mbox{\it ZF}}
+\newcommand{\Vwf}{V_{{\it wf}}}
+\newcommand{\FA}{FA}
+\newcommand{\FinSeq}{\mbox{\it FinSeq}}
+\newcommand{\ProbG}{{\sf P}}
+\renewcommand{\t}{\true}
+\newtheorem{exer}{Exercise}
+\renewcommand{\circ}{\o}
+\renewcommand{\H}{H}
+%\newcommand{\T}{T}
+\newcommand{\flro}{\mbox{{\it FLR}$_0$}}
+\newcommand{\flri}{\mbox{{\it FLR}$_1$}}
+\newcommand{\flr}{\flri}
+\newcommand{\val}{\Lambda}
+\newcommand{\abovearrow}[1]{\rightarrow\hspace{-.17in}\raisebox{1.0ex}
+{$\scriptscriptstyle{#1}$}\hspace{.1in}}
+\newcommand{\arrowa}{\,\lower1pt\hbox{$\abovearrow{a}$}}
+\newcommand{\arrowb}{\,\lower1pt\hbox{$\abovearrow{b}$}}
+
+\newcommand{\casedef}{\left\{\begin{array}{ll}}
+\newcommand{\bekic}{Beki\v{c}}
+\newcommand{\Bekic}{\bekic}
+\newcommand{\card}[1]{|#1|}
+\renewcommand{\dag}{\dagger}
+\newcommand{\valof}[3]{\val_{#1}(#2)\,#3}
+\newcommand{\where}[2]{\,#1\ {\tt where}\ \{#2\}\,}
+\newcommand{\whereleftonly}[2]{\,#1\ {\tt where}\ \{#2 \,}
+\newcommand{\whererightonly}[1]{\,#1\ \}\,}
+
+%\newcommand{\textbf}[1]{\mbox{\bf #1}}
+%\newcommand{\textrm}[1]{\mbox{\rm #1}}
+%\newcommand{\mathrm}[1]{\mbox{\rm #1}}
+%\newcommand{\mathsf}[1]{\mbox{\sf #1}}
+
+\newcommand{\row}[2]{{#1}_{#1},\ldots, {#1}_{#2}}\newcommand{\vv}[1]{\mbox{\sf #1}}
+\renewcommand{\o}{\cdot}
+\def\sol#1{{#1}^{\dag}}
+%\def\funsol{\sol{(\,\_\,)}}
+\newcommand{\wbar}{\overline{w}}
+\newcommand{\xvec}{\overline{x}}
+\newcommand{\xbar}{\xvec}%% since I always mess these up
+\newcommand{\ybar}{\yvec}
+\newcommand{\zbar}{\zvec}
+\newcommand{\pixvec}{\vec{\pi x}}
+\newcommand{\pixhat}{\pixvec}
+\newcommand{\Val}{\val}
+\newcommand{\SD}{\sf SD}
+\newcommand{\CC}{{\cal S}}
+\newcommand{\partto}{\rightharpoonup}
+ \newcommand{\recw}[2]{\mbox{\bf rec}(#1)\{#2\}} %alternate for where
+\newcommand{\heart}{\heartsuit}
+\newcommand{\club}{\clubsuit}
+\renewcommand{\diamond}{\diamondsuit}
+\newcommand{\spade}{\spadesuit}
+\newcommand{\one}{\mbox{\tt 1}}
+\newcommand{\monus} {-\hspace{-.125in}\raisebox{1.0ex}
+{$\scriptstyle{\bullet}$}\hspace{.1in}}
+\newcommand{\hash}{\mbox{\tt \#}}
+
+\newcommand{\provesH}{\vdash_{\!\!\!  \lower2pt\hbox{$\scriptstyle \sf H$}}}
+\newcommand{\provesSfive}{\vdash_{\!\!\!  \lower2pt\hbox{$\scriptstyle \sf S5$}}}
+\newcommand{\provesSfiveH}{\vdash_{\!\!\!  \lower2pt\hbox{$\scriptstyle \sf S5-H$}}}
+\newcommand{\modelseq}{\models_{\!\!\!  \lower2pt\hbox{$\scriptstyle \sf eq$}}}
+
+ \newcommand{\seat}{\mid\hspace{-.04in}\raisebox{-1.74ex}{$\rightsquare$}}
+\def\rightsqr#1#2#3#4{{\mathclose{\kern-.#4em\raise#3ex\vbox{\hrule
+    height.#2pt\hbox{\kern#1ex \vrule width.#2pt
+    height #1ex}}\hbox{\hskip.2em}}}}
+\def\leftsquare{\leftsqr{.7}2{1.15}{1}}
+\def\rightsquare{\rightsqr{.7}2{1.15}{1}}\begin{document}
+ \newcommand{\sw}{*}
+ 
+\begin{center}
+{
+\Large  Modal Logic, Winter 2019   \\
+Homework 11\\
+Due Tuesday,  April 16\\
+}
+\end{center}
+\newcommand{\heads}{h}
+\newcommand{\tails}{t}
+\newcommand{\Heads}{h}
+\newcommand{\Tails}{t}
+\newcommand{\Model}{{\cal M}}
+\newcommand{\Nodel}{{\cal N}}
+\newcommand{\Pub}{\relax}
+\begin{enumerate}
+
+
+\item This problem builds on Homework 10, problem 3.
+Recall that we had sentences $\phi_{ht}$, $\phi^*$, $\psi$, and $\chi$.
+It won't matter what those sentences actually were, but it will be important to read again the problem and all parts of what you showed.
+\rem{
+ $$\begin{array}{lcl}
+ \phi_{ht} &  &  \Heads\oplus\Tails = (\Heads\orr\Tails) \andd\nott (\Heads\andd\Tails) \\
+  \phi^*&  & ((\heads\andd K_a \heads \andd P_a \heads)\orr (\tails \andd K_a \tails \andd P_a \tails))
+   \andd\ \nott K_b\, \heads\
+ \andd \ \nott K_b\, \tails\\
+
+ \psi & & \phi_{ht} \andd \phi^* \andd CK_{a,b}(\phi_{ht}\andd\phi^*)  \\
+ \chi_{\Heads} & & \Heads \andd \psi \\
+ \chi_{\Tails} & & \Tails \andd \psi \\
+ \end{array}
+ $$
+ Here, $P\phi$ is the ``$\diamond$ version of $K$''.
+ That is, $P_a\Heads$ is an abbreviation of $\nott K_a \nott\Heads$.
+ And for all $z$, $z\models P_a\Heads$ if there is some $w$ such that $z\arrowa w$ and $w\models\Heads$.
+} 
+ 
+ Prove the following: Let $\phi$ be a modal sentence.\footnote{For the purposes of Problems 1 and 2,
+ a modal sentence is one built from the atomic sentences $t$ and $f$, using $\andd$, $\orr$, $\nott$, $\iif$, and
+ the operators $K_a$ and $K_b$.}
+ Let $\Model$ and $\Nodel$ be any two models.
+ \begin{enumerate}
+ \item Suppose that $x\in M$ and $y\in N$ both satisfy $ \chi_h$.
+ Then $x\forces \phi$ in $\Model$ if and only if $y\forces \phi$ in $\Nodel$.
+\item Suppose that $x\in M$ and $y\in N$ both satisfy $ \chi_t$.
+ Then $x\forces \phi$ in $\Model$ if and only if $y\forces \phi$ in $\Nodel$.
+\end{enumerate}
+We prove (a) and (b) together,   by induction on $\phi$.   Do the base case of $h$, and the induction step for $K_a$.
+
+(In the base case for $h$, you cannot use the fact that $\models_{all} t \iiff \nott h$.
+This is because $h$ and $t$ are just two atomic sentences, so  the sentence 
+ $ t \iiff \nott h$ is \emph{not} true at all points of all models.   Instead, we need to know that $\proves \chi_h \iif (h\oplus t)$, and also 
+$\proves \chi_t \iif (h\oplus t)$.)
+
+In the induction step for $K_a$, you will need to use 
+many of the parts of  Homework 10, problem 3.    So be sure to refer to those parts correctly.
+If you think that (b) in the induction step is similar to (a), then you can just say this. 
+
+\item This problem is a continuation of  the previous one, and indeed is an application of that problem.
+(So you can solve this problem without getting the previous one.)
+Let $\phi$ be any modal sentence.   Prove that either $\models_{all} \chi_h \iif \phi$ or else 
+$\models_{all} \chi_h \iif \nott \phi$.
+
+[This one is almost an immediate consequence of the previous problem, if you look at it correctly.
+Given $\phi$, you want to determine which of the two alternatives in our problem holds.
+It might make your life easier to look back at the model shown in 
+Homework 10, problem 3, and to check that $x\forces \chi_h$.]
+
+
+\item
+This problem   concerns the model 
+$$
+\begin{tikzpicture}[<->,>=stealth',shorten >=1pt,auto,node distance=4cm,semithick]
+\tikzstyle{every ellipse node}= [draw]
+\path (-1.5,0) node[ellipse]  (x) {$x: \Heads $}  --
+ (1.5,0) node[ellipse,draw](y)  {$y: \Tails$} ;
+%\path[<->] (x) edge  (y);
+\draw (x) -- (y) node[midway,above] {$b$};
+% \draw[<->]  (x) -- {a,b} (y);
+\path[->] (x) edge [loop left]  node {$a,b$} (x);
+\path[->] (y) edge [loop right] node {$a,b$} (y);
+ \end{tikzpicture}
+ $$
+ Tell whether the following are true or false, with a short explanation:
+ \begin{enumerate}
+ \item  $x\models \pair{\Heads} CK_{a,b} \Heads$.
+ \item  $x\models \pair{\Tails} CK_{a,b} \Heads$.
+ \item  $x\models[{\Tails}] CK_{a,b} \Heads$.
+ \item  $x\models \pair{ K_b\ \Heads} K_a\ K_b\ \Heads$.
+\end{enumerate}
+The explanations should involve restrictions of the model.
+
+
+\item Let $\phi$ be the sentence $\nott K_a  D_a$.  
+\begin{enumerate}
+\item Show by example that 
+$\not\models_{all} [\phi]CK_{\cal A} \, \phi$.
+[Hint: use an example from class.]
+\item
+Now go back and read Homework 10, problem 2.  What does part (2) tell us about Homework 10, problem 2?
+\end{enumerate}
+
+\item  This problem has to do with one of the important logical principles about announcements, 
+a valid sentence that relates announcement and negation.
+\begin{enumerate}
+\item
+Prove that for all sentences $\phi$ and $\psi$ that 
+\[ \models_{all} \pair{\phi}\nott \psi \iiff (\phi\andd \nott\pair{\phi}\psi) 
+\]
+\item
+The sentence above should remind us of the determinacy axiom from the $\sw$-logic.
+Stating this as a biconditional determinacy is $\nott\sw\phi \iiff \sw\nott\phi$.
+However, there is a small difference.   The determinacy axiom for announcement logic would seem to be 
+\[  \pair{\phi}\nott \psi \iiff  \nott\pair{\phi}\psi
+\]
+Show by an example that 
+the sentence above is \emph{not} valid.  (That is, it is not true at all points of all models.)
+[Hint: do this when $\phi$ and $\psi$ are some atomic sentences, say $p$ and $q$.    Consider a model and a world where $p$ is false.]
+\item Go back and read (a) again.  Use it to show that for all sentences $\phi$ and $\psi$,
+\[ \models_{all} [\phi]\nott \psi \iiff (\phi\iif \nott[\phi]\psi) 
+\]
+[Hint: fix $\phi$ and $\psi$, and write out the sentence in (a) with $\psi$ replaced by $\nott\psi$.
+Then also use the fact that for all $\alpha$ and $\beta$,  $[\alpha]\beta \iiff \nott \pair{\alpha} \nott \beta$,
+and also that $\nott(\gamma\iif \delta) \iiff (\gamma\andd\nott\delta)$ is a tautology of propositional logic.]
+\end{enumerate}
+
+\end{enumerate}
+\end{document}
+
+\item Prove that
+$$\models_{all}
+   \pair{\Pub \phi}K_a\,\psi
+  \iiff   ( \phi \andd K_a\, [\Pub \phi]\psi) $$
+
+
+
+
+\rem{
+\item
+  Suppose that 
+we start with a coin scenario model $W$ with three agents
+named Amina ($A$), Bao ($B$), and Cynthia ($C$).
+They enter a room together, just as in the two person scenario.
+The coin really lies heads up.
+So the initial model $\Model$ is
+$$
+\begin{tikzpicture}[<->,>=stealth',shorten >=1pt,auto,node distance=4cm,semithick]
+\tikzstyle{every ellipse node}= [draw]
+\path (-1.5,0) node[ellipse,pattern = crosshatch dots]  (x) {$x: \heads $}  --
+ (1.5,0) node[ellipse,draw](y)  {$y: \tails$} ;
+%\path[<->] (x) edge  (y);
+\draw (x) -- (y) node[midway,above] {$a,b,c$};
+% \draw[<->]  (x) -- {a,b} (y);
+\path[->] (x) edge [loop left]  node {$a,b,c$} (x);
+\path[->] (y) edge [loop right] node {$a,b,c$} (y);
+ \end{tikzpicture}
+ $$
+
+Suppose  that we consider a scenario 
+where $A$ looks at the coin,
+$B$ sees this (but not the result),
+$C$ is distracted and
+thinks nothing happened, and 
+$A$ and $B$ are fully aware of each other and of $C$.
+An action model $\Sigma$ for this is
+$$
+\begin{tikzpicture}[<->,>=stealth',shorten >=1pt,auto,node distance=4cm,semithick]
+\tikzstyle{every ellipse node}= [draw]
+\path (-1.5,1) node[ellipse,pattern = crosshatch dots]  (x) {$\alpha: \heads $}  --
+ (1.5,1) node[ellipse,draw](y)  {$\beta: \tails$} ;
+%\path[<->] (x) edge  (y);
+\draw (x) -- (y) node[midway,above] {$b$};
+% \draw[<->]  (x) -- {a,b} (y);
+\path[->] (x) edge [loop left]  node {$a,b$} (x);
+\path[->] (y) edge [loop right] node {$a,b$} (y);
+\path (0,-1) node[ellipse]  (u) {$\gamma: \heads $};
+%  --
+ %(1.5,-1) node[ellipse,draw](v)  {$\delta: \tails$} ;
+ \path[->] (u) edge [loop left]  node {$a,b,c$} (u);
+%\path[->] (v) edge [loop right] node {$a,b,c$} (v);
+%\draw (u) -- (v) node[midway,below] {$a,b,c$};
+\path[->] (x) edge node [swap] {$c$} (u);
+%\path[->] (x) edge node [near end] {$c$} (v);
+\path[->] (y) edge node {$c$} (u);
+%\path[->] (y) edge node {$c$} (v);
+ \end{tikzpicture}
+ $$
+ Calculate $\Model\otimes \Sigma$.
+
+\item   Now suppose that $C$ ``cheats'' and takes a look in
+the ``completely private way'' that we model as a private announcement.
+Write out the action model  $\Sigma'$
+this time, and then compute the new model $(\Model\otimes \Sigma)\otimes \Sigma'$ by 
+taking the action product.
+(Part of the problem is to figure out what $\Sigma'$ should be.)
+
+}
+
+\item
+Suppose we take the two muddy children, from class on November 18.
+But now we want to change things so that $A$ is \emph{blind}: she can't see anything.
+And let's assume that $B$ knows this.
+
+
+\begin{enumerate}
+\item  In the semantics, what happens when we run the muddy children scnenario with $A$ clean and $B$ muddy?
+That is, we first announce that \emph{at least one of you is muddy}, and then the two of them announce whether they 
+know or not; they announce this repeatedly.
+\item  In the semantics, what happens when we run the muddy children scnenario with $A$ muddy and $B$ clean?
+That is, we first announce that \emph{at least one of you is muddy}, and then the two of them announce whether they 
+know or not; they announce this repeatedly.
+\item
+Now we want to do the previous two parts in the proof theory.  You should have two derivations, similar to what we did in 
+class when both $A$ and $B$ were sighted.
+
+\end{enumerate}
+
+
+
+\end{enumerate}
+
+\end{document}

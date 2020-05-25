@@ -1,0 +1,484 @@
+ \documentclass[12pt]{article}
+%% note that some of the references from the answers were changed by hand
+%% search for Section and Figure
+  \usepackage{wrapfig}
+ \input{mystyle.sty}
+    \usepackage{proof}
+    \usepackage{url}
+    \usepackage{fitch}
+    \usepackage[all]{xy}  
+      \usepackage{enumitem}
+%\thispagestyle{empty}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,snakes,automata,backgrounds,petri,trees}
+\usepackage{pifont}
+\usepackage{pxfonts} 
+\oddsidemargin 0pt
+\evensidemargin 0 pt
+\topmargin -.3in
+\headsep 20pt
+\footskip 20pt
+\textheight 8.5in
+\textwidth 6.25in
+%\newcommand{\cal}[1]{\mathcal{#1}}
+% Alter some LaTeX defaults for better treatment of figures:
+    % See p.105 of "TeX Unbound" for suggested values.
+    % See pp. 199-200 of Lamport's "LaTeX" book for details.
+    %   General parameters, for ALL pages:
+%    \renewcommand{\truefraction}{0.9}	% max fraction of floats at top
+%    \renewcommand{\falsetomfraction}{0.8}	% max fraction of floats at bottom
+    %   Para meters for TEXT pages (not float pages):
+    \setcounter{topnumber}{2}
+    \setcounter{bottomnumber}{2}
+    \setcounter{totalnumber}{4}     % 2 may work better
+    \setcounter{dbltopnumber}{2}    % for 2-column pages
+    \renewcommand{\dbltopfraction}{0.9}	% fit big float above 2-col. text
+    \renewcommand{\textfraction}{0.07}	% allow minimal text w. figs
+    %   Parameters for FLOAT pages (not text pages):
+    \renewcommand{\floatpagefraction}{0.7}	% require fuller float pages
+	% N.B.: floatpagefraction MUST be less than topfraction !!
+    \renewcommand{\dblfloatpagefraction}{0.7}	% require fuller float pages
+
+\newcommand{\sw}{*}
+\renewcommand\thesubsection{\arabic{subsection}}
+
+ \begin{document}
+
+
+\begin{center}
+{
+\Large  Modal Logic, Winter 2019   \\
+   Homework 7
+\\
+due Tuesday, March 5 \\
+} 
+\end{center}
+
+\section{Some derivations in $\lang(\sw)$}
+
+\begin{enumerate}
+\item $\proves (\nott \phi) \iif (\sw\nott\sw\ \phi)$.
+ 
+\item  $\proves (\sw\nott\sw \phi)\iif (\nott\phi)$.
+\item  $\proves \phi \iif  (\nott \sw\nott\sw\ \phi)$.
+\end{enumerate}
+You can use results from class in your derivations.
+But you should say what you're using, and you should be sure that you aren't using more than
+what we showed.   That is, if you think you're cutting a corner, please put in the details.
+
+You also can drop the parentheses; usually one would not need parentheses in sentences like (1) above.
+
+\section{Another inductive step in the lemma on $\sw$-$\SD$s}
+Here is one of the main 
+results on  $\sw$-$\SD$s:
+
+Let $\alpha$ be a $*$-state description (of some order or other).
+Let $\occ(\phi) \subseteq\occ(\alpha)$.
+
+ 
+
+
+Then both of the following hold:
+\begin{itemize}
+\item[1.] Either $\proves \alpha\iif \phi$, or else $\proves \alpha\iif \nott\phi$
+\item[2.] Either $\proves \alpha\iif \sw \phi$, or else $\proves \alpha\iif \sw\nott\phi$
+\end{itemize}
+
+We prove this by induction on sentences in the language $\lang(\sw)$.
+Do the inductive step for $\nott$.   That is, write clearly what you assume and what you prove for that step;
+then do the proof.   If some of it is the same as what we saw for propositional logic, you can just say so.
+
+You only have to do the one inductive step, the one for $\nott$.
+
+\section{Triangular rat houses}
+
+
+ Suppose that we move Ronnie the Rat to a triangular house
+that looks like the model on the left below:
+$$\begin{tikzpicture}[scale=.70]
+\node[draw,circle] (A) at (90:3) {1};
+\node[draw,circle] (B) at (210:3) {3};
+\node[draw,circle] (C) at (330:3) {2};
+\draw (A.225) -- node[rotate=60,above] {}  (B.75);
+\draw(A.255) -- node[rotate=60,below] { } (B.45);
+\draw (A.285) -- node[rotate=300,below] {} (C.135);
+\draw  (A.315) -- node[rotate=300,above] {} (C.105);
+\draw  (B.345) -- node[rotate=0,below] {} (C.195);
+\draw  (B.15) -- node[rotate=0,above] {} (C.165);
+\end{tikzpicture}
+\qquad
+\begin{tikzpicture}[scale=.70]
+\node[draw,circle] (A) at (90:3) {1};
+\node[draw,circle] (B) at (210:3) {3};
+\node[draw,circle] (C) at (330:3) {2};
+\node[draw] (t) at (500:4) {clockwise};
+\draw[triangle 45-] (A.225) -- node[rotate=60,above] {}  (B.75);
+\draw[triangle 45-](A.255) -- node[rotate=60,below] { } (B.45);
+\draw[-triangle 45] (A.285) -- node[rotate=300,below] {} (C.135);
+\draw[-triangle 45]  (A.315) -- node[rotate=300,above] {} (C.105);
+\draw[triangle 45-]  (B.345) -- node[rotate=0,below] {} (C.195);
+\draw[triangle 45-]  (B.15) -- node[rotate=0,above] {} (C.165);
+\end{tikzpicture}
+\qquad
+\begin{tikzpicture}[scale=.70]
+\node[draw,circle] (A) at (90:3) {1};
+\node[draw,circle] (B) at (210:3) {3};
+\node[draw,circle] (C) at (330:3) {2};
+\node[draw] (t) at (500:4) {counterclockwise};
+\draw[-triangle 45] (A.225) -- node[rotate=60,above] {}  (B.75);
+\draw[-triangle 45](A.255) -- node[rotate=60,below] { } (B.45);
+\draw[triangle 45-] (A.285) -- node[rotate=300,below] {} (C.135);
+\draw[triangle 45-]  (A.315) -- node[rotate=300,above] {} (C.105);
+\draw[-triangle 45]  (B.345) -- node[rotate=0,below] {} (C.195);
+\draw[-triangle 45]  (B.15) -- node[rotate=0,above] {} (C.165);
+\end{tikzpicture}
+$$
+These houses have three rooms.  He can travel \emph{clockwise} (cw)
+or \emph{counterclockwise} (ccw), as shown.
+
+\newcommand{\cw}{\sw_{\mbox{\em cw}\ }}
+
+\newcommand{\ccw}{\sw_{\mbox{\em ccw}\ }}
+
+% \newcommand{\forces}{\,\mbox{$\mathrel\|\mathrel{\mkern-9mu}-\,$}}
+
+
+
+We'd like to reason in this new setting.   So we make a logical language with operators 
+$\cw$ and $\ccw$.   We call this language $\lang(\cw,\ccw)$.  
+
+\begin{enumerate}
+\item Fill in the chart below, telling what the semantics should be for this logic:
+
+$$\begin{array}{l|l}
+\begin{array}{lcl}
+1\forces \cw\phi & \quadiff& \underline{\qquad\qquad}\\
+2\forces \cw\phi & \quadiff& \underline{\qquad\qquad} \\
+3\forces \cw\phi & \quadiff&\underline{\qquad\qquad} \\
+\end{array}
+\quad \quad & \quad \quad
+\begin{array}{lcl}
+1\forces \ccw\phi & \quadiff& \underline{\qquad\qquad} \\
+2\forces \ccw\phi & \quadiff&\underline{\qquad\qquad} \\
+3\forces \ccw\phi & \quadiff&\underline{\qquad\qquad} \\
+\end{array}  \\
+\end{array}
+$$
+
+
+
+\item
+In the $\sw$-logic, we had sound logical principles such as
+involution ($ \sw\sw\phi\iiff \phi$) and determinacy ($\nott\sw\phi\iiff\sw\nott\phi$).
+What are the corresponding sound principles for  $\lang(\cw,\ccw)$?
+
+
+\item   Suppose we want a proof system for validity, as we have done with our other logics.
+How should the proof system work regarding subproofs?
+
+\item Prove what you said in part (2) in the system which you constructed in part (3).
+ {\bf New Point}
+ Or, if your answer to part (3) was to make all of the sentences in part (2) to be axioms,
+ you should prove something a little different.   For example,
+ \[
+\begin{array}{l}
+ \proves (\ccw \phi) \iif (\cw\cw \phi) \\
+  \proves (\cw\cw \phi) \iif (\ccw \phi)  \\
+\proves (\cw\ccw)\phi \iif \phi\\
+\end{array}
+\]
+ 
+
+%\item Sketch a proof of the completeness of your proof system.
+%It should be closely based on the work we did for $\lang(\sw)$.
+
+
+\end{enumerate}
+
+\newcommand{\eat}{\poss_{\scriptstyle eat}\,}
+
+\section{Eating}
+
+Let's go back to $\lang(\sw)$.  Suppose that 
+we wish to add a new action, $\eat$.
+We want this action to correspond in a given room
+to there bing food in that room, and then having  Ronnie eating all of it up.
+
+So now we have a new syntax, giving us a language $\lang(\sw,\eat)$.   We get sentences like
+\[\eat(\sw \mbox{water} \andd \eat\ \mbox{food}).\]
+
+Now we turn to the semantics.   We need to say what it means to say that 
+\[ i \forces\phi \mbox{ in $M$} \]
+Where $M$ is a model (a two-room house), and $i$ is one of its two rooms, and $\phi$ is a sentence in our new language  $\lang(\sw,\eat)$.
+For a model $M$, let $M_{-{\scriptsize food},i}$ be
+the same as $M$, except that we change the valuation so that room $i$ contains no food.
+
+
+\newcommand{\textfood}{\mbox{food}}
+
+\newcommand{\textmaze}{\mbox{maze}}
+
+\newcommand{\textwater}{\mbox{water}}
+
+\newcommand{\texttreadmill}{\mbox{treadmill}}
+For example, if $M$ is 
+$$
+ \begin{tikzpicture}[<->,>=stealth',shorten >=1pt,auto,node distance=10cm,semithick]
+\tikzstyle{every ellipse node}= [draw, text width = 2cm]
+ \path  (-3,4.1) node[ellipse,text centered]  (v) {1:  $\textfood$, $\textmaze$};
+  \path  (3,4.1) node[ellipse,text centered]  (w) {2:  $\textfood$, $\texttreadmill$};
+
+
+\path[->] (v) edge node { }  (w);
+\path[->] (1.4,3.92)  edge node {} (-1.4,3.92) ;
+
+%\draw (x) -- (s) [swap] node[midway,below]   {a,b};
+% \draw[<->]  (x) -- {a,b} (y);
+%\path[->] (x) edge [loop left]  node {a,b} (x);
+%\path[->] (s) edge [loop right] node {a,b} (s);
+%\path[->] (z) edge [loop above] node {a} (z);
+%\path[->] (v) edge [loop left] node {a} (v);
+%\path[<-] (start) edge node  [swap] {b} (v);
+%\path[<-](start) edge node [swap]  {c} (w);
+%\path[<-](v) edge [bend right] node [near start,swap] {a} (x);
+%\path[<-](x) edge [bend right] node [near start,swap] {b} (v);;
+%\path[->](w) edge node [near start,swap] {a} (x);
+%\path[<-](w) edge node [swap]  {c} (s);
+%\path[<-](start) edge  [swap] node  {c} (s);
+ \end{tikzpicture}
+ $$
+Then  $M_{-{\scriptsize food},1}$ is
+$$
+ \begin{tikzpicture}[<->,>=stealth',shorten >=1pt,auto,node distance=10cm,semithick]
+\tikzstyle{every ellipse node}= [draw, text width = 2cm]
+ \path  (-3,4.1) node[ellipse,text centered]  (v) {1:    $\textmaze$};
+  \path  (3,4.1) node[ellipse,text centered]  (w) {2:  $\textfood$, $\texttreadmill$};
+
+
+\path[->] (v) edge node { }  (w);
+\path[->] (1.4,3.92)  edge node {} (-1.4,3.92) ;
+
+%\draw (x) -- (s) [swap] node[midway,below]   {a,b};
+% \draw[<->]  (x) -- {a,b} (y);
+%\path[->] (x) edge [loop left]  node {a,b} (x);
+%\path[->] (s) edge [loop right] node {a,b} (s);
+%\path[->] (z) edge [loop above] node {a} (z);
+%\path[->] (v) edge [loop left] node {a} (v);
+%\path[<-] (start) edge node  [swap] {b} (v);
+%\path[<-](start) edge node [swap]  {c} (w);
+%\path[<-](v) edge [bend right] node [near start,swap] {a} (x);
+%\path[<-](x) edge [bend right] node [near start,swap] {b} (v);;
+%\path[->](w) edge node [near start,swap] {a} (x);
+%\path[<-](w) edge node [swap]  {c} (s);
+%\path[<-](start) edge  [swap] node  {c} (s);
+ \end{tikzpicture}
+ $$
+and 
+ $(M_{-{\scriptsize food},1})_{-{\scriptsize food},2}$ is
+$$
+ \begin{tikzpicture}[<->,>=stealth',shorten >=1pt,auto,node distance=10cm,semithick]
+\tikzstyle{every ellipse node}= [draw, text width = 2cm]
+ \path  (-3,4.1) node[ellipse,text centered]  (v) {1:    $\textmaze$};
+  \path  (3,4.1) node[ellipse,text centered]  (w) {2:  $\texttreadmill$};
+
+
+\path[->] (v) edge node { }  (w);
+\path[->] (1.4,3.92)  edge node {} (-1.4,3.92) ;
+
+%\draw (x) -- (s) [swap] node[midway,below]   {a,b};
+% \draw[<->]  (x) -- {a,b} (y);
+%\path[->] (x) edge [loop left]  node {a,b} (x);
+%\path[->] (s) edge [loop right] node {a,b} (s);
+%\path[->] (z) edge [loop above] node {a} (z);
+%\path[->] (v) edge [loop left] node {a} (v);
+%\path[<-] (start) edge node  [swap] {b} (v);
+%\path[<-](start) edge node [swap]  {c} (w);
+%\path[<-](v) edge [bend right] node [near start,swap] {a} (x);
+%\path[<-](x) edge [bend right] node [near start,swap] {b} (v);;
+%\path[->](w) edge node [near start,swap] {a} (x);
+%\path[<-](w) edge node [swap]  {c} (s);
+%\path[<-](start) edge  [swap] node  {c} (s);
+ \end{tikzpicture}
+ $$
+ 
+Now we define:
+\[
+\begin{array}{lcl}
+i\forces \eat\phi  \mbox{ in $M$} & \quadiff&  \mbox{food $\in \val_M(i)$,} \mbox{  and also $i \forces \phi $  in $M_{-{\scriptsize food},i}$}
+\\
+\end{array}  \\
+\]
+Note that if we have a model $M$ where there is no food in room $i$, then $i\forces \eat\phi$ is false in $M$.
+
+
+
+With $M$ as above, tell whether the following are true or false, with reasons:
+\begin{enumerate}
+\item $1 \forces \eat \textfood$ in $M$.
+\item $1 \forces \eat \sw\eat \true$ in $M$.
+\end{enumerate}
+And which of the following  are valid (true at all rooms of all models)?
+\begin{enumerate}
+\item[3.] $\eat\ \nott\textfood$
+\item[4.] $\eat\ \textfood$
+\item[5.] $(\eat\ \textwater) \iiff (\textfood\andd\textwater)$.
+\end{enumerate}
+
+\section{Eliminating $\eat$}
+
+We say that two sentences, $\phi_1$ and $\phi_2$,
+ in modal logic are \emph{semantically equivalent} if for every model $M$ and every world 
+ $w$ in it,
+$w\forces \phi_1$ if and only if $w \forces \phi_2$.
+
+So for the logic $\lang(\sw,\eat)$, two sentences are semantically equivalent if 
+for every rat house, each rom $i$ satisfies one of our sentences if and only if it satisfies the other.
+
+\bigskip
+
+Prove that for every sentence $\phi$ of $\lang(\sw,\eat)$ there is a sentence $\widehat{\phi}$ of $\lang(\sw)$
+such that $\phi$ and $\widehat{\phi}$ are logically equivalent.
+
+You should give a recursive definition of  $\widehat{\phi}$ as a function of $\phi$.
+In other words, in defining  $\widehat{\phi}$, you can use  $\widehat{\psi}$ for various subsentences of $\phi$.
+
+You don't have to prove your answer correct by induction (but that would be nice); you should just 
+say what the main steps of the proof would be.
+
+{\bf Clarification}
+This problem will be really hard to do in full, unless you know some rather advanced topics.
+What you should try to do is to write down \emph{recursion equations for the elimination of $\eat$}.
+That is, you want to come up with facts like the following:
+\[
+\begin{array}{lcl}
+\eat\ \textwater & \iiff & \textfood \andd\textwater \\
+\eat \eat \phi  & \iiff & \false \\
+\end{array}
+\]
+The point is that these two sentences are valid (true in every room of every house).
+And so part of the definition of $\widehat{\phi}$ will be 
+\[
+\begin{array}{lcl}
+(\eat\ \textwater)^{\hat{}}& = & \textfood \andd\textwater \\
+(\eat \eat \phi )^{\hat{}} & = & \false \\
+\end{array}
+\]
+(I have written  $\widehat{\phi}$ as $\phi^{\hat{}}$ for typographic reasons.)
+
+And you also will have equations like
+\[
+\begin{array}{lcl}
+(\phi\andd\psi)^{\hat{}}& = & \phi^{\hat{}} \andd \psi^{\hat{}}\\
+%(\eat \eat \phi )^{\hat{}} & = & \false \\
+\end{array}
+\]
+
+It would be really nice if you could have enough recursion equations to ``cover all the cases''.
+That is, you want to have enough equations that \emph{every sentence in the new language $\lang(\sw,\eat)$ is covered
+by one of your equations}.
+
+\rem{
+{\bf Note} In this homework, and in all work in this class: unless otherwise stated,
+you may use the soundness or completeness of a proof system.
+But whenever you do, you need to say which one you are using.
+
+
+\section{de Morgan's Laws}
+ 
+
+\begin{enumerate}
+\item Give a derivation that shows $\proves\nott(\phi\andd\psi)\iif (\nott \phi)\orr (\nott\psi)$.
+\item Give a derivation that shows $\proves(\nott \phi)\orr (\nott\psi) \iif \nott(\phi\andd\psi)$.
+\end{enumerate}
+In one of the two parts, you will need to use the Law of the Excluded Middle.
+
+\section{Satisfiability in propositional logic}
+Recall that  a propositional logic sentence
+$\phi$ is \emph{satisfiable} if there is some valuation $v$ such that $\semantics{$\phi$}_v =\true$.
+
+For each of the following sentences, tell whether true
+or false.  For the true ones, give a short proof.
+For the false ones, give a counterexample.
+\begin{enumerate}
+\index{satisfiable!in propositional logic}
+\item Every sentence $\phi$ or its negation $\nott\phi$ is satisfiable.
+\item Both $\phi$ and $\nott\phi$ are satisfiable. \label{partb}
+\item If $\phi\andd\psi$ is satisfiable, then both $\phi$ and $\psi$ are satisfiable. 
+\item If  both $\phi$ and $\psi$ are satisfiable,
+then $\phi\andd\psi$ is satisfiable.
+\item If $\phi\orr\psi$ is satisfiable, then either $\phi$ or $\psi$
+(or both) are satisfiable. 
+\item If  either $\phi$ or $\psi$ is satisfiable,
+then $\phi\orr\psi$ is satisfiable.
+\item  If $\phi$ and $\phi\iif\psi$ are satisfiable, then $\psi$ is satisfiable.
+\item Every sentence $\phi$ or its negation $\nott\phi$ is a tautology.
+\item  If $\phi\andd\psi$ is a tautology, then both $\phi$ and $\psi$ are tautologies. 
+\item If $\phi\orr\psi$ is a tautology, then either $\phi$ or $\psi$
+(or both) are tautologies. 
+\item If $\phi$ and $\phi\iif\psi$ are tautologies, then $\psi$ is a tautology.
+\end{enumerate}
+[As a hint, I'll solve the first two parts.
+Part (1) is true for the following reason: 
+Fix the sentence $\phi$.   Let $v$ be any valuation.
+Either $\semantics{$\phi$}  = \true$ or $\semantics{$\phi$} = \false$.
+In the first case, $v$ shows that $\phi$ is satisfiable.
+In the second case, 
+$$\semantics{$\nott\phi$}  = \nott \semantics{$\phi$}  = \nott \false  = \true,$$
+and therefore $v$ shows that $\nott\phi$ is satisfiable.
+On the other hand, part (\ref{partb}) is false.
+We may take $\phi$ to be $p\andd\nott p$.  This sentence is not satisfiable.]
+
+ 
+
+
+\section{Avoiding confusion}
+
+It is easy to confuse 
+the following two assertions:
+\begin{enumerate}
+\item[(i)]   $\not\proves \phi\iif \psi$ 
+\item[(ii)]  $\proves \phi\iif \nott\psi$.
+\end{enumerate}
+(i) says that there is \emph{no} derivation in our system that has no premises and ends with $\phi\iif \psi$.
+(ii) says that there  \emph{is} a  derivation in our system that has no premises and ends with $ \phi\iif \nott\psi$.
+
+\begin{enumerate}
+\item Give an example of two sentences $\phi$ and $\psi$ in propositional logic 
+with the property that $\not\proves \phi\iif \psi$ but    $ \not\proves \phi\iif \nott\psi$.
+This shows that (i) does not in general imply (ii).
+\item Give an example of two sentences $\phi$ and $\psi$ in propositional logic 
+with the property that $\proves \phi\iif \psi$ and also   $ \proves \phi\iif \nott\psi$.
+This shows that (ii) does not in general imply (i).
+\end{enumerate}
+
+ 
+\section{A step in the lemma on state descriptions}
+Recall from class the main lemma on state descriptions.
+It says:   For all sentences $\phi$, 
+and all state descriptions $\alpha$, 
+if $\occ(\phi)\subseteq \occ(\alpha)$, then 
+  either $\proves \alpha\iif \phi$, or else $\proves \alpha\iif \nott\phi$.
+
+The proof was by induction on $\phi$.  In the lecture slides, you can find the induction steps for $\andd$ and for $\nott$.
+Your task: prove the induction step for $\iif$.
+Be sure to use the relation between the sets $\occ(\phi\iif\psi)$, $\occ(\phi)$, and $occ(\psi)$.
+
+
+ \section{Consistent and satisfiable}
+ 
+ A sentence $\phi$ in propositional logic  is \emph{consistent} if $\not\proves\nott \phi$.
+That is, $\nott\phi$ is \emph{not} provable.  
+
+\begin{enumerate}
+\item 
+Prove that if $\phi$ is consistent, then $\phi$ is satisfiable.
+\item
+Prove that if $\phi$ is satisfiable, then $\phi$ is consistent.
+\end{enumerate}
+You will need to use either the soundness or completeness of our logic, or both.
+    Please be sure to write down exactly where
+you used these results.
+}
+
+
+\end{document}
